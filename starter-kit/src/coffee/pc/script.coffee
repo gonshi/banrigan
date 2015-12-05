@@ -1,6 +1,6 @@
 class Main
     constructor: ->
-        @ORIGIN_URL = "http://gonshi.github.io/marigan/"
+        @ORIGIN_URL = "http://gonshi.github.io/banrigan/"
         @latLngAsset = require "../../json/latlng.json"
         @social_txt = document.querySelector ".social_txt"
         @social = document.querySelector ".social"
@@ -183,5 +183,7 @@ class Main
         document.body.classList.add "is_en" if @lang == "en"
 
         @setSocial()
+
+        console.log window == parent
 
 new Main()
