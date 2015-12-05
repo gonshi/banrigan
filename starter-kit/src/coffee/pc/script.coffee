@@ -58,7 +58,7 @@ class Main
         @social_btns.facebook.addEventListener "click", =>
             FB.ui
                 method: "share"
-                href: encodeURIComponent @url
+                href: @url
 
         # tweet
         @social_btns.tweet.addEventListener "click", =>
