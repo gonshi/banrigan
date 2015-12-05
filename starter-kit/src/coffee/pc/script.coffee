@@ -100,6 +100,7 @@ class Main
         new google.maps.Marker({
             position: latLng
             map: _map
+            icon: "img/icon.png"
         })
 
         @url = "#{@ORIGIN_URL}?lat=#{_map.getCenter().lat()}&lng=#{_map.getCenter().lng()}"
@@ -184,6 +185,7 @@ class Main
 
         @setSocial()
 
-        console.log window == parent
+        if window == parent # trueなら直サイト
+            document.querySelector(".toStore").style.display = "block"
 
 new Main()

@@ -5,16 +5,17 @@ html(lang="ja")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     title= title
     meta(name="description", content=description)
-    meta(name="keywords", content="")
+    meta(name="keywords", content="ストリートビュー, 新規タブ, Chrome 拡張, 知見山")
     meta(property="og:title" content=title)
-    meta(property="og:type" content="")
-    meta(property="og:url" content="")
-    meta(property="og:image" content="")
-    meta(property="og:site_name" content="")
+    meta(property="og:type" content="website")
+    meta(property="og:url" content=url)
+    meta(property="og:image" content="#{url}img/ogp.jpg")
+    meta(property="og:site_name" content=title)
     meta(property="og:description" content=description)
-    meta(property="fb:app_id" content="")
     meta(name="twitter:card" content="summary_large_image")
-    meta(name="twitter:site" content="")
+    meta(name="twitter:title" content=title)
+    meta(name="twitter:description" content=description)
+    meta(name="twitter:image:src" content="#{url}img/ogp.jpg")
     link(href="css/style.css" rel="stylesheet")
   body
     main.contents
@@ -32,7 +33,10 @@ html(lang="ja")
         p.social_btns_inner.link
       p.link_balloon link has been copied
     p.social_btn
+    div.toStore
+      p.toStore_badge
+        a(href="https://chrome.google.com/webstore/detail/%E4%B8%87%E9%87%8C%E7%9C%BC/hdjhkecjhgpcpfenijmllbegemkiffnc/" target="_blank")
     script(src="js/script.js")
-    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9W0OlTSlpe8umt7L3J9hIvMrByhVStdA&callback=initMap")
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBltPqtV7VPho7C57WvqrD4aIkXG2kXIIE&callback=initMap")
     script
       include ga.js
