@@ -58,19 +58,23 @@ class Main
         @social_btns.facebook.addEventListener "click", =>
             FB.ui
                 method: "share"
-                href: @url
+                href: encodeURIComponent @url
 
         # tweet
         @social_btns.tweet.addEventListener "click", =>
-            @popup "http://twitter.com/share?url=#{@url}&text=#{encodeURIComponent("")}&hashtags=万里眼"
+            @popup(
+                "http://twitter.com/share?url=#{encodeURIComponent(@url)}&text=" +
+                "#{encodeURIComponent("万里眼は、Chromeで新規タブを開く度に地球上のランダムな" +
+                "位置のストリートビューを観ることができるChrome拡張です。")}&hashtags=万里眼"
+            )
 
         # hatena
         @social_btns.hatena.addEventListener "click", =>
-            @popup "http://b.hatena.ne.jp/add?url=#{@url}&title=#{encodeURIComponent("万里眼")}"
+            @popup "http://b.hatena.ne.jp/add?url=#{encodeURIComponent(@url)}&title=#{encodeURIComponent("万里眼")}"
 
         # gplus
         @social_btns.gplus.addEventListener "click", =>
-            @popup "https://plus.google.com/share?url=#{@url}"
+            @popup "https://plus.google.com/share?url=#{encodeURIComponent(@url)}"
 
     render: (latLng) ->
         new google.maps.StreetViewPanorama(
@@ -98,22 +102,22 @@ class Main
             map: _map
         })
 
-        @url = "#{@ORIGIN_URL}?lat=#{@lat}&lng=#{@lng}"
+        @url = "#{@ORIGIN_URL}?lat=#{_map.getCenter().lat()}&lng=#{_map.getCenter().lng()}"
         @social_txt.setAttribute "value", @url
         @social_btn.style.display = "block"
 
     getPlace: ->
         _rand = Math.floor(Math.random() * @latLngAsset.length)
-        @lat = @latLngAsset[_rand].lat
-        @lng = @latLngAsset[_rand].lng
 
-        @render new window.google.maps.LatLng @lat, @lng
+        @render new window.google.maps.LatLng(
+            @latLngAsset[_rand].lat, @latLngAsset[_rand].lng
+        )
 
     searchPlace: ->
         @sv = new google.maps.StreetViewService()
-        @lat = (Math.random() - 0.5) * 120
-        @lng = (Math.random() - 0.5) * 360
-        _location = new window.google.maps.LatLng @lat, @lng
+        _location = new window.google.maps.LatLng(
+            (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 360
+        )
         @sv.getPanoramaByLocation(_location, 400000, (data) =>
             if data
                 @render data.location.latLng
@@ -128,9 +132,10 @@ class Main
 
         window.initMap = =>
             if location.search.match "lat"
-                @lat = location.search.match(/\?lat=(.*?)\&/)[1]
-                @lng = location.search.match(/\&lng=(.*?)$/)[1]
-                @render new window.google.maps.LatLng @lat, @lng
+                @render new window.google.maps.LatLng(
+                    location.search.match(/\?lat=(.*?)\&/)[1],
+                    location.search.match(/(\&|＆)lng=(.*?)$/)[2]
+                )
             else
                 @searchPlace()
 

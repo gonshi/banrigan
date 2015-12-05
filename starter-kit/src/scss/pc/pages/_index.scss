@@ -40,7 +40,7 @@ body{
 
 .ttl{
     @include absolute(0, 0, 0, 0);
-    //@include sprite($index_ttl);
+    @include sprite($index_ttl);
     margin: auto;
     transform: translateY(-45px);
     @include hide_text();
