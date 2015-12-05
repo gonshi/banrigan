@@ -43,11 +43,10 @@ gulp.task 'minify:lib', () ->
 
 gulp.task 'minify:scripts', () ->
     return gulp.src([
-        config.path.js + 'lib/*.js'
-        config.path.js + '*.js'
+        config.path.js + 'script.js'
     ])
         .pipe($.plumber())
-        .pipe($.concat('all.min.js'))
+        .pipe($.concat('script.js'))
         # Concatenate And Minify JavaScript
         .pipe($.if('*.js', $.uglify({ preserveComments: 'some' })))
         # Output Files

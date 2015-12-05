@@ -1,0 +1,147 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$index-facebook-name: 'index_facebook';
+$index-facebook-x: 0px;
+$index-facebook-y: 0px;
+$index-facebook-offset-x: 0px;
+$index-facebook-offset-y: 0px;
+$index-facebook-width: 48px;
+$index-facebook-height: 48px;
+$index-facebook-total-width: 152px;
+$index-facebook-total-height: 140px;
+$index-facebook-image: '../img/index.png';
+$index-facebook: (0px, 0px, 0px, 0px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_facebook', );
+$index-gplus-name: 'index_gplus';
+$index-gplus-x: 52px;
+$index-gplus-y: 0px;
+$index-gplus-offset-x: -52px;
+$index-gplus-offset-y: 0px;
+$index-gplus-width: 48px;
+$index-gplus-height: 48px;
+$index-gplus-total-width: 152px;
+$index-gplus-total-height: 140px;
+$index-gplus-image: '../img/index.png';
+$index-gplus: (52px, 0px, -52px, 0px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_gplus', );
+$index-hatena-name: 'index_hatena';
+$index-hatena-x: 0px;
+$index-hatena-y: 52px;
+$index-hatena-offset-x: 0px;
+$index-hatena-offset-y: -52px;
+$index-hatena-width: 48px;
+$index-hatena-height: 48px;
+$index-hatena-total-width: 152px;
+$index-hatena-total-height: 140px;
+$index-hatena-image: '../img/index.png';
+$index-hatena: (0px, 52px, 0px, -52px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_hatena', );
+$index-link-name: 'index_link';
+$index-link-x: 52px;
+$index-link-y: 52px;
+$index-link-offset-x: -52px;
+$index-link-offset-y: -52px;
+$index-link-width: 48px;
+$index-link-height: 48px;
+$index-link-total-width: 152px;
+$index-link-total-height: 140px;
+$index-link-image: '../img/index.png';
+$index-link: (52px, 52px, -52px, -52px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_link', );
+$index-loading-name: 'index_loading';
+$index-loading-x: 0px;
+$index-loading-y: 104px;
+$index-loading-offset-x: 0px;
+$index-loading-offset-y: -104px;
+$index-loading-width: 36px;
+$index-loading-height: 36px;
+$index-loading-total-width: 152px;
+$index-loading-total-height: 140px;
+$index-loading-image: '../img/index.png';
+$index-loading: (0px, 104px, 0px, -104px, 36px, 36px, 152px, 140px, '../img/index.png', 'index_loading', );
+$index-social-name: 'index_social';
+$index-social-x: 104px;
+$index-social-y: 0px;
+$index-social-offset-x: -104px;
+$index-social-offset-y: 0px;
+$index-social-width: 48px;
+$index-social-height: 48px;
+$index-social-total-width: 152px;
+$index-social-total-height: 140px;
+$index-social-image: '../img/index.png';
+$index-social: (104px, 0px, -104px, 0px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_social', );
+$index-tweet-name: 'index_tweet';
+$index-tweet-x: 104px;
+$index-tweet-y: 52px;
+$index-tweet-offset-x: -104px;
+$index-tweet-offset-y: -52px;
+$index-tweet-width: 48px;
+$index-tweet-height: 48px;
+$index-tweet-total-width: 152px;
+$index-tweet-total-height: 140px;
+$index-tweet-image: '../img/index.png';
+$index-tweet: (104px, 52px, -104px, -52px, 48px, 48px, 152px, 140px, '../img/index.png', 'index_tweet', );
+$index-width: 152px;
+$index-height: 140px;
+$index-image: '../img/index.png';
+$index-sprites: ($index-facebook, $index-gplus, $index-hatena, $index-link, $index-loading, $index-social, $index-tweet, );
+$index: (152px, 140px, '../img/index.png', $index-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

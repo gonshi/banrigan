@@ -2,20 +2,201 @@
 //   index
 // ==========================================================================
 
-html, body{
-    height: 100%;
+@import "../_index.scss";
+$zIndex: "dummy", "social";
+
+@keyframes rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes show{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body{
+    background-color: #F6F6F6;
+    overflow: hidden;
+}
+
+// =========================================
+//   loading
+// =========================================
+
+.ttl{
+    @include absolute(0, 0, 0, 0);
+    //@include sprite($index_ttl);
+    margin: auto;
+    transform: translateY(-45px);
+    @include hide_text();
+}
+
+.loading{
+    @include absolute(50%, 0, '', 0);
+    @include sprite($index_loading);
+    margin: 135px auto 0;
+    animation: rotate 1.5s linear 0s infinite;
 }
 
 .contents{
-    height: 100%;
+    @include absolute(0, 0, 0, 0);
 }
 
 #sv{
-    height: 100%;
+    @include absolute(0, 0, 0, 0);
 }
 
 #map{
     @include absolute(80px, '', '', 0);
     width: 320px * 0.8;
     height: 240px * 0.8;
+}
+
+// =========================================
+//   social
+// =========================================
+
+.social{
+    @include absolute('', '', 100px, 20px);
+    position: fixed;
+    width: 192px;
+    height: 94px;
+    border-radius: 8px;
+    background-color: #263238;
+    z-index: index($zIndex, "social");
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.25s ease 0s;
+    pointer-events: none;
+
+    &:before{
+        @include absolute('', '', -6px, 13px);
+        width: 30px;
+        height: 40px;
+        transform: rotate(45deg);
+        background-color: #263238;
+        content: "";
+    }
+
+    &.is_show{
+        opacity: 1;
+        transform: translateY(0px);
+        pointer-events: auto;
+
+        &~ .social_btn{
+            opacity: 1;
+        }
+    }
+}
+
+.social_txt{
+    display: block;
+    width: 158px;
+    height: 25px;
+    margin: 10px auto;
+    padding: 0 6px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.social_btns{
+    position: relative;
+    border-top: 1px solid #687074;
+    overflow: hidden;
+}
+
+.social_btns_inner{
+    float: left;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover,
+    &.is_active{
+        opacity: 0.7;
+    }
+}
+
+.tweet{
+    @include sprite($index_tweet);
+}
+
+.facebook{
+    @include sprite($index_facebook);
+}
+
+.gplus{
+    display: none;
+    @include sprite($index_gplus);
+
+    @include is_en{
+        display: block;
+    }
+}
+
+.hatena{
+    @include sprite($index_hatena);
+
+    @include is_en{
+        display: none;
+    }
+}
+
+.link{
+    @include sprite($index_link);
+    @include hide-text();
+}
+
+.link_balloon{
+    @include absolute('', 0, -50px, '');
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    background-color: #263238;
+    border-radius: 6px;
+    transition: all 0.5s ease 0s;
+    transform: translateY(-5px);
+    opacity: 0;
+
+    &:before{
+        @include absolute(-5px, 20px, '', '');
+        display: block;
+        width: 15px;
+        height: 15px;
+        transform: rotate(45deg);
+        background-color: #263238;
+        content: "";
+    }
+
+    &.is-show{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.social_btn{
+    display: none;
+    @include absolute('', '', 30px, 20px);
+    position: fixed;
+    @include sprite($index_social);
+    cursor: pointer;
+    z-index: index($zIndex, "social");
+    opacity: 0.8;
 }

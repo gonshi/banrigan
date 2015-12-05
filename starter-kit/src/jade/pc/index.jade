@@ -16,11 +16,23 @@ html(lang="ja")
     meta(name="twitter:card" content="summary_large_image")
     meta(name="twitter:site" content="")
     link(href="css/style.css" rel="stylesheet")
-    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9W0OlTSlpe8umt7L3J9hIvMrByhVStdA&callback=initMap")
   body
     main.contents
+      h1.ttl 万里眼
+      p.loading
       div#sv
       div#map
+    div.social
+      input.social_txt(type="text" readonly)
+      div.social_btns
+        p.social_btns_inner.tweet
+        p.social_btns_inner.facebook
+        p.social_btns_inner.hatena
+        p.social_btns_inner.gplus
+        p.social_btns_inner.link
+      p.link_balloon link has been copied
+    p.social_btn
     script(src="js/script.js")
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9W0OlTSlpe8umt7L3J9hIvMrByhVStdA&callback=initMap")
     script
       include ga.js
