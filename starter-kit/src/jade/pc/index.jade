@@ -1,0 +1,26 @@
+doctype html
+html(lang="ja")
+  head(prefix="og: http://ogp.me/ns# fb: http://www.facebook.com/2008/fbml")
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    title= title
+    meta(name="description", content=description)
+    meta(name="keywords", content="")
+    meta(property="og:title" content=title)
+    meta(property="og:type" content="")
+    meta(property="og:url" content="")
+    meta(property="og:image" content="")
+    meta(property="og:site_name" content="")
+    meta(property="og:description" content=description)
+    meta(property="fb:app_id" content="")
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site" content="")
+    link(href="css/style.css" rel="stylesheet")
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9W0OlTSlpe8umt7L3J9hIvMrByhVStdA&callback=initMap")
+  body
+    main.contents
+      div#sv
+      div#map
+    script(src="js/script.js")
+    script
+      include ga.js
