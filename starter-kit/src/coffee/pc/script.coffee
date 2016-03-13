@@ -90,6 +90,11 @@ class Main
         @sv = new google.maps.StreetViewPanorama(
             document.getElementById("sv"),
             {
+                addressControl: !@hide_banner
+                linksControl: !@hide_banner
+                zoomControl: !@hide_banner
+                panControl: !@hide_banner
+                fullscreenControl: !@hide_banner
                 position: latLng
                 pov:
                     heading: _heading
@@ -98,22 +103,23 @@ class Main
             }
         )
 
-        @map = new google.maps.Map(
-            document.getElementById("map"),
-            {
-                center: latLng
-                scrollwheel: false
-                zoom: 1
-            }
-        )
+        unless @hide_banner
+            @map = new google.maps.Map(
+                document.getElementById("map"),
+                {
+                    center: latLng
+                    scrollwheel: false
+                    zoom: 1
+                }
+            )
 
-        new google.maps.Marker({
-            position: latLng
-            map: @map
-            icon: "img/icon.png"
-        })
+            new google.maps.Marker({
+                position: latLng
+                map: @map
+                icon: "img/icon.png"
+            })
 
-        @social_btn.style.display = "block"
+            @social_btn.style.display = "block"
 
     getPlace: ->
         _rand = Math.floor(Math.random() * @latLngAsset.length)
@@ -192,6 +198,8 @@ class Main
         ###########################
         #   INIT
         ###########################
+
+        @hide_banner = if location.search.match("hide_banner") then true else false
 
         _lang = window.navigator.userLanguage ||
                 window.navigator.language ||
