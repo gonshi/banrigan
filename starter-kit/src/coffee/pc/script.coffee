@@ -86,6 +86,9 @@ class Main
 
     render: (latLng, heading) ->
         _heading = parseInt(heading) || 165
+        _rotateControl =
+            if navigator.userAgent(/iphone|ipod|ipad|android/i)
+            then false else true
 
         @sv = new google.maps.StreetViewPanorama(
             document.getElementById("sv"),
@@ -95,6 +98,7 @@ class Main
                 zoomControl: !@hide_banner
                 panControl: !@hide_banner
                 scrollwheel: !@hide_banner
+                rotateControl: _rotateControl
                 fullscreenControl: !@hide_banner
                 position: latLng
                 pov:
