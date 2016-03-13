@@ -43,6 +43,12 @@ class Main
             "top=#{_top}, left=#{_left}"
         )
 
+    getShareUrl: ->
+        _url = "#{@ORIGIN_URL}?lat=#{@map.getCenter().lat()}" +
+               "&lng=#{@map.getCenter().lng()}&heading=#{@sv.pov.heading}"
+
+        return _url
+
     setSocial: ->
         _fb_appId = 202646496736073
 
@@ -58,26 +64,27 @@ class Main
         @social_btns.facebook.addEventListener "click", =>
             FB.ui
                 method: "share"
-                href: @url
+                href: @getShareUrl()
 
         # tweet
         @social_btns.tweet.addEventListener "click", =>
+            @social_txt.setAttribute "value", @getShareUrl()
             @popup(
-                "http://twitter.com/share?url=#{encodeURIComponent(@url)}&text=" +
+                "http://twitter.com/share?url=#{encodeURIComponent(@getShareUrl())}&text=" +
                 "#{encodeURIComponent("万里眼は、Chromeで新規タブを開く度に地球上のランダムな" +
                 "位置のストリートビューを観ることができるChrome拡張です。")}&hashtags=万里眼"
             )
 
         # hatena
         @social_btns.hatena.addEventListener "click", =>
-            @popup "http://b.hatena.ne.jp/add?url=#{encodeURIComponent(@url)}&title=#{encodeURIComponent("万里眼")}"
+            @popup "http://b.hatena.ne.jp/add?url=#{encodeURIComponent(@getShareUrl())}&title=#{encodeURIComponent("万里眼")}"
 
         # gplus
         @social_btns.gplus.addEventListener "click", =>
-            @popup "https://plus.google.com/share?url=#{encodeURIComponent(@url)}"
+            @popup "https://plus.google.com/share?url=#{encodeURIComponent(@getShareUrl())}"
 
     render: (latLng) ->
-        new google.maps.StreetViewPanorama(
+        @sv = new google.maps.StreetViewPanorama(
             document.getElementById("sv"),
             {
                 position: latLng
@@ -88,7 +95,7 @@ class Main
             }
         )
 
-        _map = new google.maps.Map(
+        @map = new google.maps.Map(
             document.getElementById("map"),
             {
                 center: latLng
@@ -99,12 +106,10 @@ class Main
 
         new google.maps.Marker({
             position: latLng
-            map: _map
+            map: @map
             icon: "img/icon.png"
         })
 
-        @url = "#{@ORIGIN_URL}?lat=#{_map.getCenter().lat()}&lng=#{_map.getCenter().lng()}"
-        @social_txt.setAttribute "value", @url
         @social_btn.style.display = "block"
 
     getPlace: ->
@@ -152,7 +157,7 @@ class Main
                 @social_btns.link.classList.remove "is_active"
             else
                 @social_btns.link.classList.add "is_active"
-                @social_btns.link.innerHTML = @url
+                @social_btns.link.innerHTML = @getShareUrl()
 
                 _range = document.createRange()
                 _range.selectNode @social_btns.link
