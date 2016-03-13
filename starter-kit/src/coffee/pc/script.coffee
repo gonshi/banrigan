@@ -45,7 +45,7 @@ class Main
 
     getShareUrl: ->
         _url = "#{@ORIGIN_URL}?lat=#{@map.getCenter().lat()}" +
-               "&lng=#{@map.getCenter().lng()}&heading=#{@sv.pov.heading}"
+               "&lng=#{@map.getCenter().lng()}&heading=#{Math.floor(@sv.pov.heading)}"
 
         return _url
 
