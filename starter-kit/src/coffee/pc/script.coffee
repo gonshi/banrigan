@@ -94,6 +94,7 @@ class Main
                 linksControl: !@hide_banner
                 zoomControl: !@hide_banner
                 panControl: !@hide_banner
+                scrollwheel: !@hide_banner
                 fullscreenControl: !@hide_banner
                 position: latLng
                 pov:
