@@ -77,19 +77,22 @@ class Main
 
         # hatena
         @social_btns.hatena.addEventListener "click", =>
-            @popup "http://b.hatena.ne.jp/add?url=#{encodeURIComponent(@getShareUrl())}&title=#{encodeURIComponent("万里眼")}"
+            @popup "http://b.hatena.ne.jp/add?url=#{encodeURIComponent(@getShareUrl())}&" +
+            "title=#{encodeURIComponent("万里眼")}"
 
         # gplus
         @social_btns.gplus.addEventListener "click", =>
             @popup "https://plus.google.com/share?url=#{encodeURIComponent(@getShareUrl())}"
 
-    render: (latLng) ->
+    render: (latLng, heading) ->
+        _heading = parseInt(heading) || 165
+
         @sv = new google.maps.StreetViewPanorama(
             document.getElementById("sv"),
             {
                 position: latLng
                 pov:
-                    heading: 165
+                    heading: _heading
                     pitch: 0
                 zoom: 1
             }
@@ -138,14 +141,24 @@ class Main
 
         window.initMap = =>
             if location.search.match "lat"
-                @render new window.google.maps.LatLng(
-                    location.search.match(/\?lat=(.*?)\&/)[1],
-                    location.search.match(/(\&|＆)lng=(.*?)$/)[2]
+                _heading =
+                    if location.search.match(/(\&|＆)heading=(.*?)(\&|$)/)
+                    then location.search.match(/(\&|＆)heading=(.*?)(\&|$)/)[2]
+                    else null
+
+                @render(
+                    new window.google.maps.LatLng(
+                        location.search.match(/\?lat=(.*?)\&/)[1],
+                        location.search.match(/(\&|＆)lng=(.*?)(\&|$)/)[2]
+                    ),
+                    _heading
                 )
             else
                 @searchPlace()
 
         @social_btn.addEventListener "click", =>
+            @social_txt.setAttribute "value", @getShareUrl()
+
             if @social.getAttribute("class").match "is_show"
                 @social.classList.remove "is_show"
             else
