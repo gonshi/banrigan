@@ -87,7 +87,7 @@ class Main
     render: (latLng, heading) ->
         _heading = parseInt(heading) || 165
         _rotateControl =
-            if navigator.userAgent(/iphone|ipod|ipad|android/i)
+            if navigator.userAgent.match(/iphone|ipod|ipad|android/i)
             then false else true
 
         @sv = new google.maps.StreetViewPanorama(
