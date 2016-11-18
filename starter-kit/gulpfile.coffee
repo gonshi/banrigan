@@ -53,7 +53,7 @@ gulp.task 'default', (cb) ->
     runSequence('jade', 'build', 'serve', cb)
 
 gulp.task 'deploy', (cb) ->
-    runSequence('jade', 'build', 'coffeelint', 'stylestats', 'imagemin:png', 'minify:scripts', 'copy', cb)
+    runSequence('jade', 'build', 'coffeelint', 'stylestats', 'minify:scripts', 'copy', cb)
 
 # gulp.task 'minify', (cb) ->
 #     runSequence('minify:html', 'minify:styles', 'minify:scripts', cb)

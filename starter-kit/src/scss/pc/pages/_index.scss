@@ -208,6 +208,7 @@ body{
 .toStore{
     display: none;
     @include absolute(282px, '', '', 10px);
+    z-index: index($zIndex, "social");
 }
 
 .toStore_badge{
