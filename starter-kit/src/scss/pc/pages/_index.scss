@@ -221,3 +221,35 @@ body{
         }
     }
 }
+
+.message {
+    position: fixed;
+    right: 0;
+    bottom: 32px;
+    left: 0;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    color: red;
+    border: 2px solid red;
+    background-color: white;
+    z-index: index($zIndex, "social");
+    border-radius: 4px;
+
+    &__title {
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    &__description {
+        margin-top: 12px;
+        font-size: 11px;
+    }
+
+
+    &__author {
+        text-align: center;
+        font-size: 11px;
+    }
+}
