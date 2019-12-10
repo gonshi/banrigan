@@ -227,7 +227,7 @@ body{
     right: 0;
     bottom: 32px;
     left: 0;
-    max-width: 640px;
+    max-width: 680px;
     margin: 0 auto;
     padding: 16px 24px;
     color: red;
@@ -244,11 +244,12 @@ body{
 
     &__description {
         margin-top: 12px;
+        margin-bottom: 16px;
         font-size: 11px;
     }
 
     &__additional {
-        padding: 16px 0;
+        padding: 8px 0;
         text-align: center;
         color: blue;
         font-size: 11px;
